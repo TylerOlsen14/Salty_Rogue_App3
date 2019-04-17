@@ -1,0 +1,11 @@
+{
+  "name": "salty_rogue_app3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm serve"
+  },
+  "author": "Tyler Olsen",
+  "license": "ISC"
+}
