@@ -1,38 +1,33 @@
-import React, { Component } from 'react'
-import Logo from '../logo.jpg'
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Logo from '../logo.jpg';
+import style from "../App.css";
 
 export class Navbar extends Component {
   render() {
     return (
-      <div>
-        <nav class="navbar navbar-dark bg-dark">
-            <img src={Logo} alt="Salt Rogue Real Estate"/> 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
+    <Router>
+    <div>
+        <nav class="navbar">
+            <Link to="/">
+                <img src={Logo} alt="Salt Rogue Real Estate"/> 
+            </Link>
+            <div>
+                <ul id="navBarUL">
+                    <li className="nav-item ">
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/CallList">Phone Call List</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to="/CreatePhoneRecord">New Call Record</Link>
+                    </li>
                 </ul>
             </div>
         </nav>
-      </div>
+    </div>
+    </Router>
     )
   }
 }

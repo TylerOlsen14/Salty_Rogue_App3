@@ -14,6 +14,8 @@ let Client = new Schema({
     client_postcard: {
         type: Boolean
     }
-});
+}, 
+    {collection: "clients"}
+);
 
 module.exports = mongoose.model('Client', Client)

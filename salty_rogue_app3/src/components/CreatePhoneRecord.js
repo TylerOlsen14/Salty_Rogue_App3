@@ -1,9 +1,56 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import NewPhoneRecord from './NewPhoneRecord';
 
-export class NewPhoneRecord extends Component {
+export class CreatePhoneRecord extends Component {
+  constructor(props) {
+      super(props);
+
+      this.onChangeClientName = this.onChangeClientName(this);
+      this.onChangeClientPhoneNumber = this.onChangeClientPhoneNumber(this);
+      this.onChangeClientConversation = this.onChangeClientConversation(this);
+      this.onSubmit = this.onSubmit.bind(this);  
+
+      this.state = {
+          client_name: '',
+          client_phonenumber: '',
+          client_conversation: '',
+          client_postcard: false
+      }
+    }
+    onChangeClientName(e){
+        this.setState({
+            client_name: e.target.value
+        });
+    };
+    onChangeClientPhoneNumber(e) {
+        this.setState({
+            client_phonenumber: e.target.value
+        });
+    };
+
+    onChangeClientConversation(e) {
+        this.setState({
+            client_conversation: e.target.value
+        });
+    };
+
+    onsubmit(e) {
+        e.preventDefault();
+        console.log(`Form submitted:`);
+        console.log(`Client name: ${this.state.client_name}`);
+        console.log(`Client Phone Number: ${this.state.client_phonenumber}`);
+        console.log(`Client name: ${this.state.client_conversation}`);
+        this.setState({
+            client_name: '',
+            client_phonenumber: '',
+            client_conversation: '',
+            client_postcard: false
+          })
+    };
+
   render() {
     return (
-      <div>
+        <div>
         <form>
             <div class="form-group">
                 <label>Client Name:</label>
@@ -50,4 +97,4 @@ export class NewPhoneRecord extends Component {
   }
 }
 
-export default NewPhoneRecord
+export default CreatePhoneRecord

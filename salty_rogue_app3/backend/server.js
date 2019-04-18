@@ -6,13 +6,14 @@ const mongoose = require('mongoose');
 const clientRoutes = express.Router();
 const PORT = 4000;
 // const URL = 'mongodb+srv://Tucker:Tucker@cluster0-tihhu.mongodb.net/Clients?retryWrites=true'
+const URL = "mongodb://Tucker:Tucker@cluster0-shard-00-00-tihhu.mongodb.net:27017,cluster0-shard-00-01-tihhu.mongodb.net:27017,cluster0-shard-00-02-tihhu.mongodb.net:27017/ReactPhoneRecords?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true"
 
-let Client = require('./client.model.js');
+let Client = require('./client.model');
 
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb+srv://Tucker:Tucker@cluster0-tihhu.mongodb.net/ReactPhoneRecords?retryWrites=true', {
+mongoose.connect(URL, {
     useNewUrlParser: true });
 const connection = mongoose.connection;
 var db = mongoose.connection;
@@ -57,12 +58,47 @@ clientRoutes.route('/update/:id').post(function(req, res) {
             });
     })
 })
+// clientRoutes.route('/update/:id').post(function(req, res) {
+//     Client.findById(req.params.id, function(err, client) {
+//         if (!client)
+//             res.status(404).send("data not found");
+//         else
+//             client.client_name = req.body.client_name;
+//             client.client_phonenumber = req.body.client_phonenumber;
+//             client.client_conversation = req.body.client_conversation;
+//             client.client_postcard = req.body.client_phonenumber;
 
-clientRoutes.route('/add').post(function(req, res) {
-    let client = new Client(req.body);
+//             client.save().then(client => {
+//                 res.json('Client updated!!!')
+//             })
+//             .catch(err => {
+//                 res.status(404).send("Update not possible");
+//             });
+//     })
+// })
+
+// clientRoutes.route('/add').post(function(req, res) {
+//     let client = new Client(req.body);
+//     client.save()
+//         .then(client => {
+//             res.status(200).json({'client': 'client added successfully'});
+//         })
+//         .catch(err => {
+//             res.status(400).send('adding new client failed');
+//         });
+// });
+
+// clientRoutes.route('/add').post(function(req, res) {
+app.post('/add',(req, res) => {
+    let client = new Client({
+        client_name: req.body.client_name,
+        client_phonenumber:req.body.client_phonenumber,
+        client_conversation:req.body.client_conversation,
+        client_postcard:req.body.client_postcard
+    })
     client.save()
         .then(client => {
-            res.status(200).json({'client': 'client added successfully'});
+            res.status(200).json({'Client': 'client added succesfully'})
         })
         .catch(err => {
             res.status(400).send('adding new client failed');
