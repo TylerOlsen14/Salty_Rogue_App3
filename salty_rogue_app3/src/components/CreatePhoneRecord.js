@@ -1,100 +1,127 @@
-import React, { Component } from 'react';
-import NewPhoneRecord from './NewPhoneRecord';
+import React, { Component } from "react";
+import axios from 'axios';
+// import NewPhoneRecord from './NewPhoneRecord';
 
 export class CreatePhoneRecord extends Component {
-  constructor(props) {
-      super(props);
+  state = {
+    client_name: "",
+    client_phonenumber: "",
+    client_conversation: "",
+    client_postcard: false
+  };
+  handleSubmit = (e) => {
+    e.preventDefault();
 
-      this.onChangeClientName = this.onChangeClientName(this);
-      this.onChangeClientPhoneNumber = this.onChangeClientPhoneNumber(this);
-      this.onChangeClientConversation = this.onChangeClientConversation(this);
-      this.onSubmit = this.onSubmit.bind(this);  
+    const newClient = {
+        client_name: this.state.client_name,
+        client_phonenumber: this.state.client_phonenumber,
+        client_conversation: this.state.client_conversation,
+        client_postcard: this.state.client_postcard
+    };
+    console.log(newClient)
+    console.log(`Form submitted:`);
+    console.log(`Client name: ${this.state.client_name}`);
+    console.log(`Client Phone Number: ${this.state.client_phonenumber}`);
+    console.log(`Client Postcard: ${this.state.client_conversation}`);
+    
+// axios.post("mongodb://Tucker:Tucker@cluster0-shard-00-00-tihhu.mongodb.net:27017,cluster0-shard-00-01-tihhu.mongodb.net:27017,cluster0-shard-00-02-tihhu.mongodb.net:27017/ReactPhoneRecords?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", newClient)
+    axios.post("http://localhost:4000/add", newClient)
+        .then(res => console.log(res.data))
 
-      this.state = {
-          client_name: '',
-          client_phonenumber: '',
-          client_conversation: '',
-          client_postcard: false
-      }
-    }
-    onChangeClientName(e){
-        this.setState({
-            client_name: e.target.value
-        });
-    };
-    onChangeClientPhoneNumber(e) {
-        this.setState({
-            client_phonenumber: e.target.value
-        });
-    };
+    this.setState({
+      client_name: "",
+      client_phonenumber: "",
+      client_conversation: "",
+      client_postcard: false
+    });
 
-    onChangeClientConversation(e) {
-        this.setState({
-            client_conversation: e.target.value
-        });
-    };
+      //router link
+  }
 
-    onsubmit(e) {
-        e.preventDefault();
-        console.log(`Form submitted:`);
-        console.log(`Client name: ${this.state.client_name}`);
-        console.log(`Client Phone Number: ${this.state.client_phonenumber}`);
-        console.log(`Client name: ${this.state.client_conversation}`);
-        this.setState({
-            client_name: '',
-            client_phonenumber: '',
-            client_conversation: '',
-            client_postcard: false
-          })
-    };
+  onChangeClientName = e => {
+      console.log(e.target.value)
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  onChangeClientPhoneNumber = e => {
+      console.log(e.target.value)
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  onChangeClientConversation = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+  onChangeClientPostcard = (e) => {
+      console.log(e.target)
+      this.setState({
+          [e.target.name]: e.target.value
+      })
+  }
+
 
   render() {
     return (
-        <div>
-        <form>
-            <div class="form-group">
-                <label>Client Name:</label>
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  placeholder="Client Name" 
-                  value={this.state.client_name}
-                  onChange={this.onChangeClientName}
-                  />
-            </div>
-            <div class="form-group">
-                <label>Client Phone Number:</label>
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  placeholder="Client Phone Number" 
-                  value={this.state.client_phonenumber}
-                  onChange={this.onChangePhoneNumber}
-                  />
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Conversation: </label>
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  placeholder="Client Conversation" 
-                  value={this.state.client_conversation}
-                  onChange={this.onChangeClientConversation}
-                  />
-            </div>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <div class="input-group-text">
-                  <input type="radio" aria-label="Radio button for following text input" />
-                </div>
+      <div className="form-group">
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label>Client Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Client Name"
+              name="client_name"
+            //   value={this.state.client_name}
+              onChange={this.onChangeClientName}
+            />
+          </div>
+          <div class="form-group">
+            <label>Client Phone Number:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Client Phone Number"
+              name="client_phonenumber"
+            //   value={this.state.client_phonenumber}
+              onChange={this.onChangeClientPhoneNumber}
+            />
+          </div>
+          <div class="form-group">
+            <label>Conversation: </label>
+            <textarea
+              class="form-control"
+              placeholder="Details about the conversation"
+              name="client_conversation"
+            //   value={this.state.client_conversation}
+              onChange={this.onChangeClientConversation}
+            />
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div 
+                class="input-group-text"
+                onChange={this.onChangeClientPostcard}
+                name="client_postcard"
+                >
+                <label>PostCard sent to client?</label>
+                Yes <input type="radio" name="client_postcard" value="true" />
+                No <input type="radio" name="client_postcard" value="false" /> 
               </div>
-              <input type="text" class="form-control" aria-label="Text input with radio button" />
             </div>
-
+          </div>
+          <div>
+                <input type="submit" value="Submit" />
+            </div>
+          
         </form>
       </div>
-    )
+    );
   }
 }
 
-export default CreatePhoneRecord
+export default CreatePhoneRecord;

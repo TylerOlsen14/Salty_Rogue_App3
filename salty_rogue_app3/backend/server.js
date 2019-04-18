@@ -90,6 +90,7 @@ clientRoutes.route('/update/:id').post(function(req, res) {
 
 // clientRoutes.route('/add').post(function(req, res) {
 app.post('/add',(req, res) => {
+    console.log(req.body)
     let client = new Client({
         client_name: req.body.client_name,
         client_phonenumber:req.body.client_phonenumber,

@@ -8,7 +8,7 @@ export class Navbar extends Component {
     return (
     <Router>
     <div>
-        <nav class="navbar">
+        <nav className="navbar">
             <Link to="/">
                 <img src={Logo} alt="Salt Rogue Real Estate"/> 
             </Link>
