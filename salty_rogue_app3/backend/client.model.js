@@ -6,7 +6,7 @@ let Client = new Schema({
         type: String
     },
     client_phonenumber: {
-        type: Number
+        type: String
     },
     client_conversation: {
         type: String
