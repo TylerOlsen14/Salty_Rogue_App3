@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Logo from '../logo.jpg';
-import style from "../App.css";
+import "../App.css";
 
 export class Navbar extends Component {
   render() {
@@ -14,7 +14,7 @@ export class Navbar extends Component {
             </Link>
             <div>
                 <ul id="navBarUL">
-                    <li className="nav-item ">
+                    <li className="nav-item">
                         <Link to="/">Home</Link>
                     </li>
                     <li className="nav-item">
