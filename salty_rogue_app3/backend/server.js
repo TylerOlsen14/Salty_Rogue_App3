@@ -29,10 +29,10 @@ clientRoutes.get('/', async (req, res, next) => {
         if (err) return next(err);
         res.json(clients)
     })
-    // const result = await Client.res.render('index', {
-    //     clients: clients
+    const result = await Client.res.render('index', {
+        clients: clients
 
-    // })
+    })
 });
 
 clientRoutes.route('/:id').put( async (req, res) => {
