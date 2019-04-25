@@ -23,72 +23,33 @@ connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
 
-clientRoutes.route('/').get(function(req, res) {
-    Client.find(function(err, clients) {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(clients);
-        }
-    });
+clientRoutes.get('/', async (req, res, next) => {
+    console.log("CLIENTS!!!");
+    Client.find((err, clients) => {
+        if (err) return next(err);
+        res.json(clients)
+    })
+    // const result = await Client.res.render('index', {
+    //     clients: clients
+
+    // })
 });
 
-clientRoutes.route('/:id').get(function(req, res) {
+clientRoutes.route('/:id').put( async (req, res) => {
+    console.log('F and A');
+    const result = await Client.findByIdAndUpdate(req.params.id, req.body)
+        return res.send(result)
+});
+
+clientRoutes.route('/:id').get( async (req, res) => {
     let id = req.params.id;
-    Client.findById(id, function(err, client) {
+    // const response = await collection.find(req.params.id)
+    const response = await Client.findById(id, function(err, client) {
         res.json(client)
     });
 });
 
-clientRoutes.route('/update/:id').post(function(req, res) {
-    Client.findById(req.params.id, function(err, client) {
-        if (!client)
-            res.status(404).send("data not found");
-        else
-            client.client_name = req.body.client_name;
-            client.client_phonenumber = req.body.client_phonenumber;
-            client.client_conversation = req.body.client_conversation;
-            client.client_postcard = req.body.client_phonenumber;
 
-            client.save().then(client => {
-                res.json('Client updated!!!')
-            })
-            .catch(err => {
-                res.status(404).send("Update not possible");
-            });
-    })
-})
-// clientRoutes.route('/update/:id').post(function(req, res) {
-//     Client.findById(req.params.id, function(err, client) {
-//         if (!client)
-//             res.status(404).send("data not found");
-//         else
-//             client.client_name = req.body.client_name;
-//             client.client_phonenumber = req.body.client_phonenumber;
-//             client.client_conversation = req.body.client_conversation;
-//             client.client_postcard = req.body.client_phonenumber;
-
-//             client.save().then(client => {
-//                 res.json('Client updated!!!')
-//             })
-//             .catch(err => {
-//                 res.status(404).send("Update not possible");
-//             });
-//     })
-// })
-
-// clientRoutes.route('/add').post(function(req, res) {
-//     let client = new Client(req.body);
-//     client.save()
-//         .then(client => {
-//             res.status(200).json({'client': 'client added successfully'});
-//         })
-//         .catch(err => {
-//             res.status(400).send('adding new client failed');
-//         });
-// });
-
-// clientRoutes.route('/add').post(function(req, res) {
 app.post('/add',(req, res) => {
     console.log(req.body)
     let client = new Client({

@@ -17,7 +17,7 @@ class App extends Component {
           <Navbar/>
           {/* <CallList/> */}
           <Route path="/" exact component={CallList} />
-          <Route path="/EditPhoneRecord/:_id" exact component={EditPhoneRecord} />
+          <Route path="/EditPhoneRecord/:id" exact component={EditPhoneRecord} />
           <Route path="/CreatePhoneRecord" exact component={CreatePhoneRecord} />
         </div>
       </Router>
