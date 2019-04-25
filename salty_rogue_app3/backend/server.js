@@ -49,6 +49,12 @@ clientRoutes.route('/:id').get( async (req, res) => {
     });
 });
 
+clientRoutes.route('/:id').delete( async (req, res) => {  
+    const response = await Client.findByIdAndRemove(req.params.id, (err, client) => {
+        if (err) return res.status(500).send("PROBLEM!!!");
+        res.status(200).send("Client " + client.client_name +" was deleted.");
+    })
+})
 
 app.post('/add',(req, res) => {
     console.log(req.body)

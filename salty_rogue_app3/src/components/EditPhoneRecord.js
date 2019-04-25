@@ -119,6 +119,7 @@ export class EditPhoneRecord extends Component {
             <br/>
             <div className="form-group">
               <button type="submit" value="UpdatePhoneRecord" className="btn btn-primary" name="submit" id="submit" onClick={this.handleSubmit}>Submit</button>
+              <button type="submit" value="DeletePhoneRecord" className="btn btn-danger" name="delete" id="delete" onClick={this.handleDelete}>Delete</button>
             </div>
           </div>
         </form>
