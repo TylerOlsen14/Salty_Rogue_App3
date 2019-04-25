@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import NewPhoneRecord from './components/NewPhoneRecord';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 
 import CreatePhoneRecord from './components/CreatePhoneRecord'
@@ -15,10 +14,9 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar/>
-          {/* <CallList/> */}
-          <Route path="/" exact component={CallList} />
-          <Route path="/EditPhoneRecord/:id" exact component={EditPhoneRecord} />
-          <Route path="/CreatePhoneRecord" exact component={CreatePhoneRecord} />
+          <Route exact path="/" component={CallList} />
+          <Route path="/EditPhoneRecord/:id" component={EditPhoneRecord} />
+          <Route path="/CreatePhoneRecord" component={CreatePhoneRecord} />
         </div>
       </Router>
     );

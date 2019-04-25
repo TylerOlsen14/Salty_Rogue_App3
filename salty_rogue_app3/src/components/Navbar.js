@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Logo from '../logo.jpg';
 import "../App.css";
 
@@ -9,22 +9,25 @@ export class Navbar extends Component {
     <Router>
     <div>
         <nav className="navbar">
-            <Link to="/">
+            <a href="/" class="nav-link">
                 <img src={Logo} alt="Salt Rogue Real Estate"/> 
-            </Link>
-            <div>
-                <ul id="navBarUL">
-                    <li className="nav-item">
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/CallList">Phone Call List</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to="/CreatePhoneRecord">New Call Record</Link>
-                    </li>
-                </ul>
-            </div>
+            </a>
+            <ul>
+                <li className="nav-item">
+                    <button>
+                        <a href="/" class="nav-link">Phone Call List</a>
+                    </button>
+                </li>
+                {/* <li className="nav-item">
+                    <a href="/CallList">Phone Call List</a>
+                </li> */}
+                <li className="nav-item">
+                    <button>
+                        <a href="/CreatePhoneRecord" class="nav-link">New Call Record</a>
+                    </button>
+                </li>
+            </ul>
+            {/* </div> */}
         </nav>
     </div>
     </Router>

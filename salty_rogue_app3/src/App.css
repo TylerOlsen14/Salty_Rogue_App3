@@ -2,19 +2,25 @@ img {
     width: 50px;
 }
 
-#navBarUL{
-    text-decoration-color: black;
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: black;
+    align-content: center;
+}
+
+ul{
+    width: 25rem;
+    display: flex;
     list-style: none;
     flex-direction: row;
-    display: flex;
     justify-content: space-evenly;
+    align-content: center;
+    /* background-color: aquamarine; */
 }
 
-.navbar{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-li{
+.nav-item{
     align-self: flex-start;
 }
+
