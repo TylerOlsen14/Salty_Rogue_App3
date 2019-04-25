@@ -29,6 +29,13 @@ export class CallList extends Component {
   this.state = {clients: []};
 }
 
+// componentDidMount() {
+//   return fetch (`url`)
+//     function
+//       method: "GET", 
+//       mode: "cors"
+// }
+
 componentDidMount() {
   axios.get('http://localhost:4000/clients/')
       .then(response => {

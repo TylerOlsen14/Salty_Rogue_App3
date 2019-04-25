@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Redirect } from 'react-router'
 // import NewPhoneRecord from './NewPhoneRecord';
+const URL = "mongodb://Tucker:Tucker@cluster0-shard-00-00-tihhu.mongodb.net:27017,cluster0-shard-00-01-tihhu.mongodb.net:27017,cluster0-shard-00-02-tihhu.mongodb.net:27017/ReactPhoneRecords?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true"
 
 export class CreatePhoneRecord extends Component {
   // constructor() {
@@ -32,7 +33,7 @@ export class CreatePhoneRecord extends Component {
 
     // axios.post("mongodb://Tucker:Tucker@cluster0-shard-00-00-tihhu.mongodb.net:27017,cluster0-shard-00-01-tihhu.mongodb.net:27017,cluster0-shard-00-02-tihhu.mongodb.net:27017/ReactPhoneRecords?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true", newClient)
     axios
-      .post("http://localhost:4000/add", newClient)
+      .post(URL, newClient)
       .then(res => console.log(res.data));
 
     this.setState({
