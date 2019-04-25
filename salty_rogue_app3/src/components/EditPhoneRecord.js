@@ -68,6 +68,17 @@ export class EditPhoneRecord extends Component {
       this.props.history.push('/')
   };
 
+  handleDelete = async (e) => {
+    console.log(e)
+    e.preventDefault()
+    const recordID = this.props.match.params.id
+    console.log(recordID)
+    await fetch(`http://localhost:4000/clients/${recordID}`, {
+      method: "DELETE"
+    });
+    this.props.history.push('/')
+  }
+
   render() {
     return (
       <div>
