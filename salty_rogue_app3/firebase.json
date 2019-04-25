@@ -5,6 +5,12 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/api/v1/**",
+        "function": "webApi"
+      }
     ]
   },
   "database": {
@@ -19,14 +25,8 @@
   },
   "functions": {
     "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run lint",
-      "npm --prefix \"$RESOURCE_DIR\" run build"
-    ]
-  },
-  "rewrites": [
-    {
-      "source": "/api/v1/**",
-      "function": "webApi"
-    }
-  ]
+      "npm --prefix \"$RESOURCE_DIR\" run lint"
+    ],
+    "source": "functions"
+  }
 }
