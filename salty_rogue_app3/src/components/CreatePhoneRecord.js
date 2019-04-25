@@ -126,7 +126,8 @@ export class CreatePhoneRecord extends Component {
             <input type="submit" value="Submit" />
           </div>
           {fireRedirect && (
-            <Redirect to={from || '/'} />
+            <Redirect to='/' />
+            /*{ <Redirect to={from || '/'} /> }*/
           )}
         </form>
       </div>
